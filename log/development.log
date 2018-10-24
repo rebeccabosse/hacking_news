@@ -1,0 +1,275 @@
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ bin/rails:9
+  [1m[35m (183.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (149.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateUsers (20181024164755)
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "last_name" varchar, "email" varchar)[0m
+  ↳ db/migrate/20181024164755_create_users.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20181024164755"]]
+  ↳ bin/rails:9
+  [1m[35m (176.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreateLinks (20181024164805)
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "links" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "url" varchar, "user_id" integer, CONSTRAINT "fk_rails_005e9b2a6a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  ↳ db/migrate/20181024164805_create_links.rb:3
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX "index_links_on_user_id" ON "links" ("user_id")[0m
+  ↳ db/migrate/20181024164805_create_links.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20181024164805"]]
+  ↳ bin/rails:9
+  [1m[35m (208.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreateCommentaires (20181024164834)
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "commentaires" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text, "user_id" integer, "link_id" integer, CONSTRAINT "fk_rails_19ff011e60"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_12f3271a68"
+FOREIGN KEY ("link_id")
+  REFERENCES "links" ("id")
+)[0m
+  ↳ db/migrate/20181024164834_create_commentaires.rb:3
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX "index_commentaires_on_user_id" ON "commentaires" ("user_id")[0m
+  ↳ db/migrate/20181024164834_create_commentaires.rb:3
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX "index_commentaires_on_link_id" ON "commentaires" ("link_id")[0m
+  ↳ db/migrate/20181024164834_create_commentaires.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20181024164834"]]
+  ↳ bin/rails:9
+  [1m[35m (111.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+Migrating to CreateComDeComs (20181024165543)
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "com_de_coms" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "content" text, "user_id" integer, "comment_id" integer, CONSTRAINT "fk_rails_f938370b46"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_671736d50c"
+FOREIGN KEY ("comment_id")
+  REFERENCES "comments" ("id")
+)[0m
+  ↳ db/migrate/20181024165543_create_com_de_coms.rb:3
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE  INDEX "index_com_de_coms_on_user_id" ON "com_de_coms" ("user_id")[0m
+  ↳ db/migrate/20181024165543_create_com_de_coms.rb:3
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE  INDEX "index_com_de_coms_on_comment_id" ON "com_de_coms" ("comment_id")[0m
+  ↳ db/migrate/20181024165543_create_com_de_coms.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20181024165543"]]
+  ↳ bin/rails:9
+  [1m[35m (121.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-10-24 16:57:59.379493"], ["updated_at", "2018-10-24 16:57:59.379493"]]
+  ↳ bin/rails:9
+  [1m[35m (129.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email") VALUES (?, ?, ?)[0m  [["first_name", "Hodkiewicz LLC"], ["last_name", "Rolfson-Dietrich"], ["email", "nohemi@andersonoberbrunner.io"]]
+  ↳ db/seeds.rb:11
+  [1m[35m (167.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email") VALUES (?, ?, ?)[0m  [["first_name", "Reichel-Carter"], ["last_name", "Kessler-Buckridge"], ["email", "analisa@stiedemann.org"]]
+  ↳ db/seeds.rb:11
+  [1m[35m (80.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email") VALUES (?, ?, ?)[0m  [["first_name", "Kunde-Heathcote"], ["last_name", "D'Amore Group"], ["email", "diondooley@hagenes.io"]]
+  ↳ db/seeds.rb:11
+  [1m[35m (124.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email") VALUES (?, ?, ?)[0m  [["first_name", "Pouros Inc"], ["last_name", "Goodwin, Klein and Prohaska"], ["email", "ian@larson.name"]]
+  ↳ db/seeds.rb:11
+  [1m[35m (78.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email") VALUES (?, ?, ?)[0m  [["first_name", "Deckow Group"], ["last_name", "Schimmel and Sons"], ["email", "brendanfeest@mannbashirian.io"]]
+  ↳ db/seeds.rb:11
+  [1m[35m (122.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email") VALUES (?, ?, ?)[0m  [["first_name", "Yost, Hirthe and Nader"], ["last_name", "Weimann-Koelpin"], ["email", "yajaira@anderson.io"]]
+  ↳ db/seeds.rb:11
+  [1m[35m (125.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email") VALUES (?, ?, ?)[0m  [["first_name", "Hahn Group"], ["last_name", "Waelchi and Sons"], ["email", "timwindler@parisianledner.com"]]
+  ↳ db/seeds.rb:11
+  [1m[35m (122.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email") VALUES (?, ?, ?)[0m  [["first_name", "Cummings, Hintz and Hodkiewicz"], ["last_name", "Luettgen and Sons"], ["email", "nelsonfriesen@herman.net"]]
+  ↳ db/seeds.rb:11
+  [1m[35m (78.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.4ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email") VALUES (?, ?, ?)[0m  [["first_name", "Batz, Kunde and Herzog"], ["last_name", "MacGyver and Sons"], ["email", "jude@bartolettimedhurst.org"]]
+  ↳ db/seeds.rb:11
+  [1m[35m (124.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email") VALUES (?, ?, ?)[0m  [["first_name", "Mueller-Spencer"], ["last_name", "Lueilwitz, Swift and Marquardt"], ["email", "talishaoreilly@price.net"]]
+  ↳ db/seeds.rb:11
+  [1m[35m (131.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mLink Create (0.3ms)[0m  [1m[32mINSERT INTO "links" ("title", "url", "user_id") VALUES (?, ?, ?)[0m  [["title", "Green and Sons"], ["url", "http://dietrichveum.io/jammie_franecki"], ["user_id", 6]]
+  ↳ db/seeds.rb:11
+  [1m[35m (81.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mLink Create (0.9ms)[0m  [1m[32mINSERT INTO "links" ("title", "url", "user_id") VALUES (?, ?, ?)[0m  [["title", "Paucek, Lesch and Von"], ["url", "http://schultzconsidine.biz/billy"], ["user_id", 9]]
+  ↳ db/seeds.rb:11
+  [1m[35m (65.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mLink Create (0.4ms)[0m  [1m[32mINSERT INTO "links" ("title", "url", "user_id") VALUES (?, ?, ?)[0m  [["title", "Huels, Bahringer and Cole"], ["url", "http://mertz.net/cordia"], ["user_id", 4]]
+  ↳ db/seeds.rb:11
+  [1m[35m (96.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mLink Create (0.9ms)[0m  [1m[32mINSERT INTO "links" ("title", "url", "user_id") VALUES (?, ?, ?)[0m  [["title", "Bailey-Gusikowski"], ["url", "http://funk.io/rich"], ["user_id", 9]]
+  ↳ db/seeds.rb:11
+  [1m[35m (67.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mLink Create (0.9ms)[0m  [1m[32mINSERT INTO "links" ("title", "url", "user_id") VALUES (?, ?, ?)[0m  [["title", "Kiehn, Oberbrunner and Mohr"], ["url", "http://mohr.org/fletcher.ratke"], ["user_id", 6]]
+  ↳ db/seeds.rb:11
+  [1m[35m (101.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (1.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mLink Create (1.2ms)[0m  [1m[32mINSERT INTO "links" ("title", "url", "user_id") VALUES (?, ?, ?)[0m  [["title", "Vandervort-Hamill"], ["url", "http://bayerrath.net/lanelle_mertz"], ["user_id", 8]]
+  ↳ db/seeds.rb:11
+  [1m[35m (101.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mLink Create (0.8ms)[0m  [1m[32mINSERT INTO "links" ("title", "url", "user_id") VALUES (?, ?, ?)[0m  [["title", "Russel Inc"], ["url", "http://kuhn.co/napoleon_franecki"], ["user_id", 9]]
+  ↳ db/seeds.rb:11
+  [1m[35m (68.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mLink Create (0.8ms)[0m  [1m[32mINSERT INTO "links" ("title", "url", "user_id") VALUES (?, ?, ?)[0m  [["title", "Parisian-Champlin"], ["url", "http://hilllbuckridge.net/brain"], ["user_id", 9]]
+  ↳ db/seeds.rb:11
+  [1m[35m (103.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mLink Create (0.9ms)[0m  [1m[32mINSERT INTO "links" ("title", "url", "user_id") VALUES (?, ?, ?)[0m  [["title", "Upton and Sons"], ["url", "http://balistreri.co/isreal"], ["user_id", 9]]
+  ↳ db/seeds.rb:11
+  [1m[35m (102.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mLink Create (1.0ms)[0m  [1m[32mINSERT INTO "links" ("title", "url", "user_id") VALUES (?, ?, ?)[0m  [["title", "Mertz and Sons"], ["url", "http://rowedickens.co/lonny"], ["user_id", 7]]
+  ↳ db/seeds.rb:11
+  [1m[35m (67.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mCommentaire Create (0.3ms)[0m  [1m[32mINSERT INTO "commentaires" ("content", "user_id", "link_id") VALUES (?, ?, ?)[0m  [["content", "Narchost"], ["user_id", 4], ["link_id", 4]]
+  ↳ db/seeds.rb:11
+  [1m[35m (70.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mCommentaire Create (0.7ms)[0m  [1m[32mINSERT INTO "commentaires" ("content", "user_id", "link_id") VALUES (?, ?, ?)[0m  [["content", "Hyarnustar"], ["user_id", 4], ["link_id", 1]]
+  ↳ db/seeds.rb:11
+  [1m[35m (95.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mCommentaire Create (0.7ms)[0m  [1m[32mINSERT INTO "commentaires" ("content", "user_id", "link_id") VALUES (?, ?, ?)[0m  [["content", "Gap of Rohan"], ["user_id", 9], ["link_id", 1]]
+  ↳ db/seeds.rb:11
+  [1m[35m (95.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mCommentaire Create (0.7ms)[0m  [1m[32mINSERT INTO "commentaires" ("content", "user_id", "link_id") VALUES (?, ?, ?)[0m  [["content", "Angband"], ["user_id", 5], ["link_id", 4]]
+  ↳ db/seeds.rb:11
+  [1m[35m (106.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mCommentaire Create (0.9ms)[0m  [1m[32mINSERT INTO "commentaires" ("content", "user_id", "link_id") VALUES (?, ?, ?)[0m  [["content", "Gorgoroth"], ["user_id", 3], ["link_id", 8]]
+  ↳ db/seeds.rb:11
+  [1m[35m (94.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mCommentaire Create (0.8ms)[0m  [1m[32mINSERT INTO "commentaires" ("content", "user_id", "link_id") VALUES (?, ?, ?)[0m  [["content", "Black Gate"], ["user_id", 5], ["link_id", 6]]
+  ↳ db/seeds.rb:11
+  [1m[35m (104.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mCommentaire Create (0.9ms)[0m  [1m[32mINSERT INTO "commentaires" ("content", "user_id", "link_id") VALUES (?, ?, ?)[0m  [["content", "Paths of the Dead"], ["user_id", 9], ["link_id", 8]]
+  ↳ db/seeds.rb:11
+  [1m[35m (71.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mCommentaire Create (0.8ms)[0m  [1m[32mINSERT INTO "commentaires" ("content", "user_id", "link_id") VALUES (?, ?, ?)[0m  [["content", "Vaiya"], ["user_id", 9], ["link_id", 5]]
+  ↳ db/seeds.rb:11
+  [1m[35m (104.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mCommentaire Create (0.7ms)[0m  [1m[32mINSERT INTO "commentaires" ("content", "user_id", "link_id") VALUES (?, ?, ?)[0m  [["content", "Elostirion"], ["user_id", 6], ["link_id", 9]]
+  ↳ db/seeds.rb:11
+  [1m[35m (105.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[36mCommentaire Create (0.8ms)[0m  [1m[32mINSERT INTO "commentaires" ("content", "user_id", "link_id") VALUES (?, ?, ?)[0m  [["content", "Lothlorièn"], ["user_id", 4], ["link_id", 7]]
+  ↳ db/seeds.rb:11
+  [1m[35m (103.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ db/seeds.rb:11
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9

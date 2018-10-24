@@ -1,0 +1,2 @@
+class ComDeCom < ApplicationRecord
+end
