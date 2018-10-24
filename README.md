@@ -11,7 +11,7 @@ Un message board à la Hacker News. Les utilisateurs peuvent poster des liens. L
 ## Auteurs
 
 *   Team Caen
-*   Maxime Beaufils, Bertrand Pelletier, Iliès El Ouartassi
+*   Rebecca Bossé et Charlotte Vaudour
 
 ## En savoir plus
 
